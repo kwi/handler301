@@ -14,13 +14,13 @@ In the config/handler301.yml of your rails app :
 
 Then, configure a controller that match non matching routes in your config/routes.rb
 
-[*Rails2*]
+<strong>Rails2</strong>
 
   ActionController::Routing::Routes.draw  do |map|
     map.connect "*path", :controller => 'error', :action => 'handle404'
   end
 
-[*Rails3*]
+<strong>Rails3</strong>
 
   MkdBaseApp::Application.routes.draw do
     match "*path" => 'error#handle404'
@@ -42,6 +42,6 @@ And finally, in your ErrorController (or whatever the name of your non matching 
 
 == TODO
 
-  * Nothing planned yet
+* Nothing planned yet
 
 Copyright (c) 2010 Guillaume Luccisano - g-mai|: guillaume.luccisano, released under the MIT license
