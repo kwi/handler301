@@ -21,7 +21,7 @@ class Handler301ControllerTest < ActionController::TestCase
   end
   
   def test_non_matching_url_again_with_params
-    get 'show', :path => 'non_matching_url?hi=42'
+    get 'show', :path => 'non_matching_url', :hi => 42
     assert_equal @response.body, 'KO'
   end
   
@@ -41,17 +41,17 @@ class Handler301ControllerTest < ActionController::TestCase
   end
   
   def test_matching_url_simple_route_with_params
-    get 'show', :path => "old_url.html?params1=2&params2=44"
+    get 'show', :path => "old_url.html", :params1 => 2, :params2 => 44
     assert_redirected_to home_path(:params1 => 2, :params2 => 44)
   end
   
   def test_matching_url_with_blank_in_route
-    get 'show', :path => "product_number_one.html?params1=2&params2=44"
+    get 'show', :path => "product_number_one.html", :params1 => 2, :params2 => 44
     assert_redirected_to products_path(:params1 => 2, :params2 => 44, :id => 1)
   end
   
   def test_matching_url_with_blank_in_route_with_params
-    get 'show', :path => "product_number_one.html?params1=2&params2=44"
+    get 'show', :path => "product_number_one.html", :params1 => 2, :params2 => 44
     assert_redirected_to products_path(:params1 => 2, :params2 => 44, :id => 1)
   end
 

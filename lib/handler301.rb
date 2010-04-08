@@ -1,6 +1,7 @@
 # encoding: utf8
 
 module Handler301
+  Hash301 = {}
 
 private
   # Automatically add _path if not present
@@ -12,19 +13,19 @@ public
   # Handle 301 redirections 
   # Make the redirection if an url match
   # Return true if a redirection has been made
-  def handle_301(path)
+  def handle_301(path, query_params = {})
     return nil if !path
     
-    t = path.gsub(/^\//, '').split('?', 2)
-    path = t[0]
+    path = path.gsub(/^\//, '').split('?', 2).first
 
-    if r = Handler301Table[path]
-      params = t.size == 2 ? Rack::Utils::parse_query(t[1]) : {}
+    if r = Hash301[path]
+      query_params.delete('action')
+      query_params.delete('controller')
 
       redirect_path = nil
       # Standard case, use the simple route name
       if !r.index(' ')
-        redirect_path = self.send(handle_301_auto_add_path(r).to_sym, params)
+        redirect_path = self.send(handle_301_auto_add_path(r).to_sym, query_params)
       else # Blank case / Works only with hashes
 
         r = r.split(' ', 2)
@@ -34,7 +35,7 @@ public
         # Must do an eval here ?
         hash = eval(rhash) rescue {}
 
-        redirect_path = send(handle_301_auto_add_path(r[0]).to_sym, hash.merge(params))
+        redirect_path = send(handle_301_auto_add_path(r[0]).to_sym, hash.merge(query_params))
       end
 
       if redirect_path
@@ -45,6 +46,11 @@ public
 
     # No redirection has been made
     return nil
+  end
+  
+  def self.load_301_file(file)
+    h = YAML.load_file(file) rescue {}
+    Hash301.merge!(h)
   end
 
 end
