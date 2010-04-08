@@ -14,13 +14,13 @@ In the config/handler301.yml of your rails app :
 
 Then, configure a controller that match non matching routes in your config/routes.rb
 
-<strong>Rails2</strong>
+==== Rails2
 
   ActionController::Routing::Routes.draw  do |map|
     map.connect "*path", :controller => 'error', :action => 'handle404'
   end
 
-<strong>Rails3</strong>
+==== Rails3
 
   MkdBaseApp::Application.routes.draw do
     match "*path" => 'error#handle404'
