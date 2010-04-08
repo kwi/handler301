@@ -1,0 +1,3 @@
+"old_url.html": home_path
+"old_url_without_path.html": home
+"product_number_one.html": products_path :id => 1

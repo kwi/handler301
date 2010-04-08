@@ -1,0 +1,47 @@
+= Handler 301
+
+Handler 301 is a plugin for Ruby on Rails that lets you easily manage 301 redirections in on place in order to redirect them to current named routes.
+
+All necessary informations are available on the wiki : http://wiki.github.com/kwi/handler301/
+
+== Configuration example :
+
+In the config/handler301.yml of your rails app :
+
+  "old_url.html": home_path
+  "old_url_without_path.html": home
+  "product_number_one.html": products_path :id => 1
+
+Then, configure a controller that match non matching routes in your config/routes.rb
+
+[*Rails2*]
+
+  ActionController::Routing::Routes.draw  do |map|
+    map.connect "*path", :controller => 'error', :action => 'handle404'
+  end
+
+[*Rails3*]
+
+  MkdBaseApp::Application.routes.draw do
+    match "*path" => 'error#handle404'
+  end
+  
+And finally, in your ErrorController (or whatever the name of your non matching routes controller) :
+
+
+  class ErrorController < ApplicationController
+    def handle404
+      unless handle_301(request.path)
+
+        # Do your stuff here
+
+      end
+    end
+  end
+  
+
+== TODO
+
+  * Nothing planned yet
+
+Copyright (c) 2010 Guillaume Luccisano - g-mai|: guillaume.luccisano, released under the MIT license
