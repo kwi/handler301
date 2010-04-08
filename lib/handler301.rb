@@ -39,7 +39,7 @@ public
       end
 
       if redirect_path
-        redirect_to redirect_path
+        redirect_to(redirect_path, :status => 301)
         return true
       end
     end
