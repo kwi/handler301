@@ -1,3 +1,7 @@
+0.2.0 (Apr 12, 2010)
+
+* Releasing gem
+
 0.1.0 (Apr 8, 2010)
 
 * Initial release

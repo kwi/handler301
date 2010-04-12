@@ -1,5 +1,4 @@
 # encoding: utf8
-
 module Handler301
   Hash301 = {}
 
@@ -50,7 +49,16 @@ public
   
   def self.load_301_file(file)
     h = YAML.load_file(file) rescue {}
+    puts "[Handler301] Error in loading '#{file}', this file is empty or not valid." if h.size == 0
     Hash301.merge!(h)
   end
 
 end
+
+# Load config 301 file
+if defined? Rails
+  Handler301::load_301_file('config/handler301.yml')
+end
+
+# Include 301 handler in ActionController base
+ActionController::Base.send :include, Handler301
