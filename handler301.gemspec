@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "handler301"
-  s.version = "0.2.1"
+  s.version = "0.2.2"
   s.author = "Guillaume Luccisano"
   s.email = "guillaume.luccisano@gmail.com"
   s.homepage = "http://github.com/kwi/handler301"

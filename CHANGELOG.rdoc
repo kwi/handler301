@@ -1,3 +1,7 @@
+0.2.2 (June 3, 2010)
+
+* Fix bug when handler301.yml is empty
+
 0.2.1 (Apr 21, 2010)
 
 * Works on ruby 1.9.2-head

@@ -49,8 +49,11 @@ public
   
   def self.load_301_file(file)
     h = YAML.load_file(file) rescue {}
-    puts "[Handler301] Error in loading '#{file}', this file is empty or not valid." if h.size == 0
-    Hash301.merge!(h)
+    if Hash === h and h.size > 0
+      Hash301.merge!(h)
+    else
+      puts "[Handler301] Error in loading '#{file}', this file is empty or not valid."
+    end
   end
 
 end
